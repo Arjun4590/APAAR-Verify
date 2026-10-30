@@ -1,0 +1,161 @@
+import { Student } from '../types';
+
+export const initialStudents: Student[] = [
+  {
+    id: 'stu-aarav-01',
+    apaarId: '123456789012',
+    name: 'Aarav Sharma',
+    dateOfBirth: '2005-05-12',
+    gender: 'Male',
+    institutionId: 'inst-wit-01',
+    studentNumber: 'WIT-2024-CSE-042',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-rohit-02',
+    apaarId: null, // Missing APAAR in staging/repo for Fuzzy candidate
+    name: 'Rohit S. Verma',
+    dateOfBirth: '2004-07-14',
+    gender: 'Male',
+    institutionId: 'inst-wit-01',
+    studentNumber: 'WIT-2024-CSE-089',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Review Required',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-rohit-03',
+    apaarId: '994812345678',
+    name: 'Rohit Verma',
+    dateOfBirth: '2004-07-14',
+    gender: 'Male',
+    institutionId: 'inst-dtu-02',
+    studentNumber: 'DMEC-2024-IT-015',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Review Required',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-priya-04',
+    apaarId: '882194018234',
+    name: 'Priya Patel',
+    dateOfBirth: '2004-03-22',
+    gender: 'Female',
+    institutionId: 'inst-wit-01',
+    studentNumber: 'WIT-2025-EE-LAT04',
+    admissionYear: 2025,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-ananya-05',
+    apaarId: '334918274019',
+    name: 'Ananya Deshmukh',
+    dateOfBirth: '2005-09-18',
+    gender: 'Female',
+    institutionId: 'inst-wit-01',
+    studentNumber: 'WIT-2024-CSE-003',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-vikram-06',
+    apaarId: '448102938471',
+    name: 'Vikramaditya Rao',
+    dateOfBirth: '2003-11-05',
+    gender: 'Male',
+    institutionId: 'inst-bims-03',
+    studentNumber: 'BIMS-2025-PGDM-112',
+    admissionYear: 2025,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-sneha-07',
+    apaarId: '559281740192',
+    name: 'Sneha Kulkarni',
+    dateOfBirth: '2005-01-30',
+    gender: 'Female',
+    institutionId: 'inst-wit-01',
+    studentNumber: 'WIT-2024-IT-021',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-tanvi-08',
+    apaarId: '660192837461',
+    name: 'Tanvi Mehta',
+    dateOfBirth: '2005-04-14',
+    gender: 'Female',
+    institutionId: 'inst-gec-06',
+    studentNumber: 'GEC-2024-CSE-054',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-devendra-09',
+    apaarId: '771283940182',
+    name: 'Devendra Singh',
+    dateOfBirth: '2004-12-19',
+    gender: 'Male',
+    institutionId: 'inst-apex-04',
+    studentNumber: 'APEX-2024-MECH-011',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-kavita-10',
+    apaarId: '882394019283',
+    name: 'Kavita Nair',
+    dateOfBirth: '2005-06-08',
+    gender: 'Female',
+    institutionId: 'inst-wit-01',
+    studentNumber: 'WIT-2024-MBA-088',
+    admissionYear: 2025,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-rahul-11',
+    apaarId: '993405128394',
+    name: 'Rahul Iyer',
+    dateOfBirth: '2005-02-17',
+    gender: 'Male',
+    institutionId: 'inst-dtu-02',
+    studentNumber: 'DMEC-2024-CSE-091',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  },
+  {
+    id: 'stu-siddharth-12',
+    apaarId: '104516273849',
+    name: 'Siddharth Joshi',
+    dateOfBirth: '2004-08-25',
+    gender: 'Male',
+    institutionId: 'inst-wit-01',
+    studentNumber: 'WIT-2024-CSE-110',
+    admissionYear: 2024,
+    currentStatus: 'Active',
+    verificationStatus: 'Verified',
+    sourceMode: 'local-reference'
+  }
+];
+
