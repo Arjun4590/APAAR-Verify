@@ -33,7 +33,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 export const OverviewDashboard: React.FC = () => {
-  const { institutions, students, enrolments, findings, academicYear, loadScenario } = useDemoSession();
+  const { institutions, students, enrolments, findings, academicYear } = useDemoSession();
   const navigate = useNavigate();
 
   // Synthetic roll-up KPI metrics
@@ -100,7 +100,7 @@ export const OverviewDashboard: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate('/admin/exceptions')}
-            className="px-3 py-1.5 text-xs font-semibold bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors flex items-center gap-1.5"
+            className="px-3.5 py-1.5 text-xs font-semibold bg-blue-900 text-white rounded-md hover:bg-blue-800 transition-colors flex items-center gap-1.5 shadow-sm"
           >
             <AlertTriangle className="w-3.5 h-3.5 text-amber-300" />
             <span>Open Exceptions ({pendingReviewCount})</span>
@@ -108,54 +108,35 @@ export const OverviewDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Stats Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+      {/* Clean 4-Metric KPI Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title="Institutions"
+          title="Registered Institutions"
           value={totalInstitutions}
-          subtitle="All reporting groups"
+          subtitle={`${totalCourses} approved programmes`}
           icon={<Building2 className="w-4 h-4" />}
         />
         <StatCard
-          title="Approved Courses"
-          value={totalCourses}
-          subtitle={`Intake: ${totalApprovedIntake.toLocaleString()}`}
-          icon={<FileTextIcon className="w-4 h-4" />}
-        />
-        <StatCard
-          title="Students"
-          value={totalStudents}
-          subtitle="Normalized records"
+          title="Student Enrolments"
+          value={totalStudents.toLocaleString()}
+          subtitle={`Capacity: ${totalApprovedIntake.toLocaleString()} seats`}
           icon={<Users className="w-4 h-4" />}
+          changeType="positive"
         />
         <StatCard
-          title="APAAR Linked"
+          title="APAAR Coverage Rate"
           value={`${Math.round((apaarLinkedCount / (totalStudents || 1)) * 100)}%`}
-          subtitle={`${apaarLinkedCount} of ${totalStudents}`}
+          subtitle={`${apaarLinkedCount} linked / ${verifiedCount} verified`}
           icon={<ShieldCheck className="w-4 h-4" />}
           changeType="positive"
         />
         <StatCard
-          title="Verified"
-          value={verifiedCount}
-          subtitle="Passed A1-A6"
-          icon={<CheckCircle className="w-4 h-4" />}
-          changeType="positive"
-        />
-        <StatCard
-          title="Review Required"
-          value={totalStudents - verifiedCount}
-          subtitle="Needs verification"
-          icon={<Clock className="w-4 h-4" />}
-          changeType="warning"
-        />
-        <StatCard
-          title="Exceptions"
+          title="Regulatory Review Cases"
           value={pendingReviewCount}
-          subtitle="Human review queue"
+          subtitle="Exceptions requiring decision"
           icon={<AlertTriangle className="w-4 h-4" />}
           alert={pendingReviewCount > 0}
-          changeType="negative"
+          changeType={pendingReviewCount > 0 ? 'warning' : 'neutral'}
         />
       </div>
 

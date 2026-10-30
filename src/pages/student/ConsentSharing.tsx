@@ -33,9 +33,7 @@ export const ConsentSharing: React.FC = () => {
 
   const handleApproveAndJumpToStakeholder = (requestId: string) => {
     updateStudentConsent(requestId, 'Approved');
-    alert('Consent Approved! Switching you to Stakeholder Verification Portal to inspect the verified outcome.');
-    setRole('stakeholder');
-    navigate('/stakeholder/results');
+    alert('Consent Approved: Requesting organization has been authorized to access verified academic records for 30 days.');
   };
 
   return (
@@ -45,7 +43,7 @@ export const ConsentSharing: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold text-slate-900 tracking-tight">Consent & Third-Party Record Sharing</h1>
-            <Badge variant="indigo">Scenario F (Consent-Gate)</Badge>
+            <Badge variant="indigo">DPDP Act Compliance</Badge>
           </div>
           <p className="text-xs text-slate-500 mt-0.5">
             Authorize or deny prospective employers and background verification teams access to your verified academic records.

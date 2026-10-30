@@ -19,7 +19,7 @@ import { Button } from '../../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 
 export const StakeholderDashboard: React.FC = () => {
-  const { verificationRequests, loadScenario } = useDemoSession();
+  const { verificationRequests } = useDemoSession();
   const navigate = useNavigate();
 
   const totalRequests = verificationRequests.length;
@@ -48,14 +48,6 @@ export const StakeholderDashboard: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5 text-blue-600" />}
-            onClick={() => loadScenario('F')}
-          >
-            Scenario F (Consent)
-          </Button>
           <Button
             variant="primary"
             size="sm"

@@ -4,7 +4,7 @@ export const initialInstitutions: Institution[] = [
   {
     id: 'inst-wit-01',
     code: '1-3329841',
-    name: 'Western Institute of Technology (Demo)',
+    name: 'Western Institute of Technology',
     state: 'Maharashtra',
     district: 'Pune',
     institutionType: 'Autonomous',
@@ -72,7 +72,7 @@ export const initialInstitutions: Institution[] = [
   {
     id: 'inst-dtu-02',
     code: '1-1094821',
-    name: 'Delhi Metropolitan Engineering College (Demo)',
+    name: 'Delhi Metropolitan Engineering College',
     state: 'Delhi',
     district: 'New Delhi',
     institutionType: 'Government',
@@ -118,7 +118,7 @@ export const initialInstitutions: Institution[] = [
   {
     id: 'inst-bims-03',
     code: '1-4402911',
-    name: 'Bengaluru Institute of Management Studies (Demo)',
+    name: 'Bengaluru Institute of Management Studies',
     state: 'Karnataka',
     district: 'Bengaluru Urban',
     institutionType: 'Private-Unaided',
@@ -153,7 +153,7 @@ export const initialInstitutions: Institution[] = [
   {
     id: 'inst-apex-04',
     code: '1-7729103',
-    name: 'Apex Institute of Advanced Engineering (Demo)',
+    name: 'Apex Institute of Advanced Engineering',
     state: 'Tamil Nadu',
     district: 'Coimbatore',
     institutionType: 'Private-Unaided',
@@ -193,13 +193,13 @@ export const initialInstitutions: Institution[] = [
       { year: '2023-24', intake: 180, enrolled: 162, fillRate: 90.0 },
       { year: '2024-25', intake: 180, enrolled: 158, fillRate: 87.7 },
       { year: '2025-26', intake: 180, enrolled: 140, fillRate: 77.7 },
-      { year: '2026-27', intake: 180, enrolled: 62, fillRate: 42.2 }, // Statistical Anomaly (Scenario D)
+      { year: '2026-27', intake: 180, enrolled: 62, fillRate: 42.2 }, // Statistical Variance Flag
     ]
   },
   {
     id: 'inst-sol-05',
     code: '1-9981240',
-    name: 'National Open & Online Learning Academy (Demo)',
+    name: 'National Open & Online Learning Academy',
     state: 'Delhi',
     district: 'South Delhi',
     institutionType: 'Autonomous',
@@ -245,7 +245,7 @@ export const initialInstitutions: Institution[] = [
   {
     id: 'inst-gec-06',
     code: '1-2109845',
-    name: 'Gujarat Engineering College (Demo)',
+    name: 'Gujarat Engineering College',
     state: 'Gujarat',
     district: 'Ahmedabad',
     institutionType: 'Government',
@@ -280,7 +280,7 @@ export const initialInstitutions: Institution[] = [
   {
     id: 'inst-vit-07',
     code: '1-5582910',
-    name: 'Kashi Institute of Technology (Demo)',
+    name: 'Kashi Institute of Technology',
     state: 'Uttar Pradesh',
     district: 'Varanasi',
     institutionType: 'Govt-Aided',

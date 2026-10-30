@@ -26,8 +26,7 @@ export const Corrections: React.FC = () => {
     stagingRows,
     updateStagingRow,
     revalidateStaging,
-    commitStagingBatch,
-    loadScenario
+    commitStagingBatch
   } = useDemoSession();
 
   const navigate = useNavigate();
@@ -37,22 +36,6 @@ export const Corrections: React.FC = () => {
   const blockingErrors = stagingRows.filter(r => !r.isValid);
   const blockingCount = blockingErrors.length;
   const isCommitDisabled = blockingCount > 0;
-
-  // Helper quick-fix buttons for demonstration convenience during presentation
-  const handleQuickFixApaar = () => {
-    // Row 2 has 11 digits: '98451029381' -> append '0' to make it 12 digits
-    updateStagingRow(2, 'apaarId', '984510293810');
-  };
-
-  const handleQuickFixDuplicate = () => {
-    // Row 5 has duplicate APAAR '449182736450' from Row 4 -> change to '449182736459'
-    updateStagingRow(5, 'apaarId', '449182736459');
-  };
-
-  const handleFixAllBlocking = () => {
-    handleQuickFixApaar();
-    handleQuickFixDuplicate();
-  };
 
   const handleCommit = () => {
     const res = commitStagingBatch();
@@ -80,7 +63,7 @@ export const Corrections: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold text-slate-900 tracking-tight">Fix-Before-Submit Correction Staging</h1>
-            <Badge variant="indigo">Scenario A Workflow</Badge>
+            <Badge variant="indigo">Ingestion Staging Area</Badge>
           </div>
           <p className="text-xs text-slate-500 mt-0.5">
             Resolve blocking format and duplicate errors inline before committing verified rows to the central repository.
@@ -92,9 +75,9 @@ export const Corrections: React.FC = () => {
             variant="outline"
             size="sm"
             icon={<RefreshCw className="w-3.5 h-3.5" />}
-            onClick={() => loadScenario('A')}
+            onClick={() => revalidateStaging()}
           >
-            Reset Scenario A Batch
+            Revalidate Rows
           </Button>
           <Button
             variant="outline"
@@ -187,36 +170,8 @@ export const Corrections: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Demo Fix Buttons */}
+          {/* Commit Gate Actions */}
           <div className="flex items-center gap-2 shrink-0">
-            {isCommitDisabled && (
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleQuickFixApaar}
-                  title="Appends missing 12th digit to Row 2"
-                >
-                  Fix Row 2 (12 Digits)
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleQuickFixDuplicate}
-                  title="Changes duplicate APAAR in Row 5"
-                >
-                  Fix Row 5 (Duplicate)
-                </Button>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  icon={<Sparkles className="w-3.5 h-3.5" />}
-                  onClick={handleFixAllBlocking}
-                >
-                  Auto-Fix All Blocking
-                </Button>
-              </>
-            )}
             <Button
               variant={isCommitDisabled ? 'outline' : 'success'}
               size="md"

@@ -27,13 +27,12 @@ export const StudentDashboard: React.FC = () => {
     enrolments,
     institutions,
     verificationRequests,
-    correctionRequests,
-    loadScenario
+    correctionRequests
   } = useDemoSession();
 
   const navigate = useNavigate();
 
-  // Scoped to demo student Aarav Sharma
+  // Scoped to student Aarav Sharma
   const student = students.find(s => s.id === 'stu-aarav-01') || students[0];
   const studentEnrolments = enrolments.filter(e => e.studentId === student.id);
   const primaryEnrolment = studentEnrolments[0];
@@ -65,20 +64,12 @@ export const StudentDashboard: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <Button
-            variant="outline"
+            variant="primary"
             size="sm"
             icon={<QrCode className="w-3.5 h-3.5" />}
             onClick={() => navigate('/student/qr')}
           >
             Digital QR Pass
-          </Button>
-          <Button
-            variant="primary"
-            size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5" />}
-            onClick={() => loadScenario('F')}
-          >
-            Demo Scenario F (Consent)
           </Button>
         </div>
       </div>
@@ -167,7 +158,7 @@ export const StudentDashboard: React.FC = () => {
               </div>
             </div>
 
-            {/* Scenario B Notice: Simultaneous Online Enrolment */}
+            {/* Simultaneous Online Enrolment (UGC Guidelines) */}
             {studentEnrolments.length > 1 && (
               <div className="p-3 bg-blue-50/70 border border-blue-200 rounded-lg text-blue-950">
                 <span className="font-bold block">Concurrent Online Degree Enrolment (UGC 2022 Guidelines):</span>
@@ -180,7 +171,7 @@ export const StudentDashboard: React.FC = () => {
           </CardContent>
         </Card>
 
-        {/* Pending Third-Party Consent Action Box (Scenario F) */}
+        {/* Pending Third-Party Consent Action Box */}
         <Card className={pendingRequests.length > 0 ? 'border-amber-300 ring-1 ring-amber-200' : ''}>
           <CardHeader>
             <CardTitle>Third-Party Verification Requests</CardTitle>

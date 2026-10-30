@@ -32,8 +32,7 @@ export const ExceptionsReview: React.FC = () => {
     findings,
     updateFindingStatus,
     confirmFuzzyIdentity,
-    reverseFuzzyIdentityMerge,
-    loadScenario
+    reverseFuzzyIdentityMerge
   } = useDemoSession();
 
   const [activeTab, setActiveTab] = useState('ALL');
@@ -106,16 +105,6 @@ export const ExceptionsReview: React.FC = () => {
           <p className="text-xs text-slate-500 mt-0.5">
             Transparent case review queue, institution clarifications, and reviewer-authorized identity merge resolutions.
           </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5 text-amber-600" />}
-            onClick={() => loadScenario('C')}
-          >
-            Load Scenario C (Fuzzy Identity Review)
-          </Button>
         </div>
       </div>
 
@@ -217,13 +206,13 @@ export const ExceptionsReview: React.FC = () => {
               </div>
             </div>
 
-            {/* Special Action Box for Scenario C: Fuzzy Identity Candidate */}
+            {/* Action Box: Fuzzy Identity Candidate */}
             {selectedCase.type === 'FUZZY_IDENTITY' && (
               <div className="p-4 bg-amber-50 border border-amber-300 rounded-xl space-y-3">
                 <div className="flex items-center gap-2">
                   <Split className="w-4 h-4 text-amber-700" />
                   <h4 className="font-bold text-amber-950 text-xs uppercase tracking-wider">
-                    Candidate Identity Match Resolution (Scenario C)
+                    Candidate Identity Match Resolution & Conflict Assessment
                   </h4>
                 </div>
                 <p className="text-amber-900 leading-relaxed">

@@ -20,12 +20,12 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Toolti
 import { useNavigate } from 'react-router-dom';
 
 export const AnomalyMonitoring: React.FC = () => {
-  const { institutions, findings, updateFindingStatus, loadScenario } = useDemoSession();
+  const { institutions, findings, updateFindingStatus } = useDemoSession();
   const navigate = useNavigate();
 
   const [activeAnomaly, setActiveAnomaly] = useState<any | null>(null);
 
-  // Scenario D Target: Apex Institute of Advanced Engineering
+  // Institution with statistical variance: Apex Institute of Advanced Engineering
   const apexInst = institutions.find(i => i.id === 'inst-apex-04') || institutions[3];
 
   const fillRateComparisonData = [
@@ -63,16 +63,6 @@ export const AnomalyMonitoring: React.FC = () => {
             Peer benchmarking, fill-rate cliffs, withdrawal spikes and contact cluster detection across academic years.
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5 text-red-600" />}
-            onClick={() => loadScenario('D')}
-          >
-            Highlight Scenario D (Anomaly)
-          </Button>
-        </div>
       </div>
 
       {/* Regulatory Context Notice */}
@@ -88,7 +78,7 @@ export const AnomalyMonitoring: React.FC = () => {
         </div>
       </div>
 
-      {/* Primary Highlighted Case: Apex Institute (Scenario D) */}
+      {/* Highlighted Case: Apex Institute */}
       <Card className="border-amber-300 ring-1 ring-amber-200">
         <CardHeader action={
           <Badge variant="red" size="md">High Risk Signal · Review Required</Badge>

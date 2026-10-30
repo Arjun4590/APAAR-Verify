@@ -108,17 +108,10 @@ export const NewVerificationRequest: React.FC = () => {
               <div className="space-y-2">
                 <p className="text-amber-900 leading-relaxed">
                   This request is currently <strong>Awaiting Candidate Consent</strong> in the Student Portal. 
-                  In accordance with privacy and DPDP principles, credentials are protected until the student authorizes access.
+                  In accordance with privacy and DPDP Act principles, credentials are protected until the student authorizes access.
                 </p>
-                <div className="pt-1 flex items-center gap-2">
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    icon={<Sparkles className="w-3.5 h-3.5" />}
-                    onClick={handleSwitchToStudentToApprove}
-                  >
-                    Switch to Student Portal to Approve Consent (Demo Shortcut) →
-                  </Button>
+                <div className="p-2.5 bg-white/80 rounded border border-amber-200 text-slate-700 text-[11px]">
+                  <span>Status: Notification dispatched to candidate. Record will become accessible once approved in the Student Portal.</span>
                 </div>
               </div>
             )}
@@ -139,25 +132,15 @@ export const NewVerificationRequest: React.FC = () => {
               <label className="font-bold text-slate-700 block mb-1">
                 Candidate Verification Token / Reference ID
               </label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={studentToken}
-                  onChange={e => setStudentToken(e.target.value)}
-                  className="flex-1 p-2 font-mono text-xs bg-slate-50 border border-slate-200 rounded focus:bg-white focus:outline-none"
-                  placeholder="e.g. VRF-2026-8821"
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setStudentToken('VRF-2026-8821')}
-                >
-                  Use Aarav's Demo Token
-                </Button>
-              </div>
-              <span className="text-[10px] text-slate-400 mt-1 block">
-                Pre-configured token for Aarav Sharma (Scenario F): <code className="text-blue-900 font-bold">VRF-2026-8821</code>
+              <input
+                type="text"
+                value={studentToken}
+                onChange={e => setStudentToken(e.target.value)}
+                className="w-full p-2 font-mono text-xs bg-slate-50 border border-slate-200 rounded focus:bg-white focus:outline-none"
+                placeholder="e.g. VRF-2026-8821"
+              />
+              <span className="text-[10px] text-slate-500 mt-1 block">
+                Candidate digital credential reference token (e.g. <code className="text-blue-900 font-bold">VRF-2026-8821</code>)
               </span>
             </div>
 

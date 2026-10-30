@@ -24,7 +24,7 @@ import { maskApaar, getStatusBadgeClass } from '../../utils/formatters';
 import { exportToCSV } from '../../utils/csvExport';
 
 export const StudentRecords: React.FC = () => {
-  const { students, enrolments, institutions, loadScenario } = useDemoSession();
+  const { students, enrolments, institutions } = useDemoSession();
 
   const [search, setSearch] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('ALL');
@@ -95,14 +95,6 @@ export const StudentRecords: React.FC = () => {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5 text-blue-600" />}
-            onClick={() => loadScenario('E')}
-          >
-            Scenario E (Lateral Entry)
-          </Button>
           <Button variant="outline" size="sm" icon={<Download className="w-3.5 h-3.5" />} onClick={handleExport}>
             Export CSV
           </Button>
@@ -281,12 +273,12 @@ export const StudentRecords: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Scenario E Highlight: Lateral Entry Credential Validation */}
+                  {/* Lateral Entry Credential Validation */}
                   {enr?.entryType === 'Lateral Entry' && (
                     <div className="p-3 bg-teal-50 border border-teal-200 rounded-lg text-teal-900 space-y-1">
                       <span className="font-bold flex items-center gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5 text-teal-600" />
-                        Scenario E — Legitimate Lateral Entry Verified:
+                        Lateral Entry Qualification Verified:
                       </span>
                       <p className="leading-relaxed">
                         Student entered 2nd Year via state lateral-entry quota. 

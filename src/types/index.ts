@@ -201,7 +201,7 @@ export interface ThirdPartyVerificationRequest {
   expiryDate: string;
   consentStatus: 'Pending Approval' | 'Approved' | 'Rejected' | 'Revoked';
   resultStatus: 'Pending' | 'Verified' | 'Partial' | 'Mismatched';
-  source: 'Local Demo Repository' | 'Simulated APAAR Connector' | 'Simulated NAD Connector';
+  source: 'Central Student Repository' | 'Simulated APAAR Connector' | 'Simulated NAD Connector';
 }
 
 export interface StudentCorrectionRequest {

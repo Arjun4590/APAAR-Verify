@@ -180,16 +180,16 @@ export const CoursesIntake: React.FC = () => {
               </div>
             </div>
 
-            {/* Scenario A Note */}
+            {/* Category Quota Monitoring Alert */}
             {selectedCourse.code === 'CSE-101' && (
               <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-lg text-amber-900 space-y-1">
                 <span className="font-bold flex items-center gap-1.5">
                   <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
-                  Scenario A Planted Finding in Staging Batch:
+                  Active Category Quota Alert:
                 </span>
                 <p className="leading-relaxed">
                   Staging batch BATCH-2026-WIT-01 contains <strong>7 TFW admissions</strong> against the <strong>6 permitted seats</strong> 
-                  calculated above (120 × 5%). This triggers an automatic non-blocking review finding in the staging area.
+                  calculated above (120 × 5%). This triggers an automatic non-blocking regulatory review finding in the validation queue.
                 </p>
               </div>
             )}

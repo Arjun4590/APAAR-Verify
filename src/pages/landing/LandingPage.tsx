@@ -19,7 +19,7 @@ import { Card } from '../../components/common/Card';
 import { Badge } from '../../components/common/Badge';
 
 export const LandingPage: React.FC = () => {
-  const { setRole, loadScenario } = useDemoSession();
+  const { setRole } = useDemoSession();
   const navigate = useNavigate();
 
   const handleRoleSelect = (role: 'admin' | 'institution_admin' | 'student' | 'stakeholder', targetPath: string) => {
@@ -166,98 +166,60 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Six Interactive Scenarios Showcase */}
+        {/* Enterprise Core Architecture Grid */}
         <div className="mt-12 p-6 rounded-xl bg-slate-800/50 border border-slate-700">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h4 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-blue-400" />
-                Featured End-to-End Demo Scenarios
+                <Database className="w-4 h-4 text-blue-400" />
+                Statutory Regulatory Architecture & Core Engines
               </h4>
               <p className="text-xs text-slate-400 mt-0.5">
-                Click any scenario below to automatically switch role, load the state, and jump into the live workflow:
+                Integrated rule evaluation framework operating in real-time across all four functional portals:
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <button
-              onClick={() => {
-                loadScenario('A');
-                navigate('/institution/corrections');
-              }}
-              className="p-3 text-left rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-slate-700 hover:border-blue-400 transition-all text-xs"
-            >
-              <span className="font-bold text-blue-300 block mb-1">Scenario A: Fix-Before-Submit Gate</span>
-              <span className="text-slate-400">
-                WIT uploads 11-digit APAAR, in-file duplicate & 7 TFW admissions (cap: 6). Blocked until fixed.
-              </span>
-            </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-4 rounded-lg bg-slate-800 border border-slate-700 text-xs space-y-2">
+              <div className="flex items-center gap-2 text-blue-400 font-bold">
+                <FileSpreadsheet className="w-4 h-4 shrink-0" />
+                <span>Fix-Before-Submit Gate</span>
+              </div>
+              <p className="text-slate-400 leading-relaxed text-[11px]">
+                Validates APAAR format, de-duplicates records in-flight, and enforces category caps prior to atomic database commit.
+              </p>
+            </div>
 
-            <button
-              onClick={() => {
-                loadScenario('B');
-                navigate('/admin/verification-centre');
-              }}
-              className="p-3 text-left rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-slate-700 hover:border-teal-400 transition-all text-xs"
-            >
-              <span className="font-bold text-teal-300 block mb-1">Scenario B: Exact APAAR Match (Dual Mode)</span>
-              <span className="text-slate-400">
-                Same APAAR at WIT (Physical) & NOOLA (Online). Evaluated as Informational under UGC 2022 guidelines.
-              </span>
-            </button>
+            <div className="p-4 rounded-lg bg-slate-800 border border-slate-700 text-xs space-y-2">
+              <div className="flex items-center gap-2 text-teal-400 font-bold">
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span>Cross-Enrolment Logic</span>
+              </div>
+              <p className="text-slate-400 leading-relaxed text-[11px]">
+                Contextual dual-degree evaluation under UGC 2022 guidelines, distinguishing valid online study from physical schedule conflicts.
+              </p>
+            </div>
 
-            <button
-              onClick={() => {
-                loadScenario('C');
-                navigate('/admin/exceptions');
-              }}
-              className="p-3 text-left rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-slate-700 hover:border-amber-400 transition-all text-xs"
-            >
-              <span className="font-bold text-amber-300 block mb-1">Scenario C: Fuzzy Identity & Shift Overlap</span>
-              <span className="text-slate-400">
-                Rohit S. Verma vs Rohit Verma. Human confirmation required before reversible identity merge.
-              </span>
-            </button>
+            <div className="p-4 rounded-lg bg-slate-800 border border-slate-700 text-xs space-y-2">
+              <div className="flex items-center gap-2 text-amber-400 font-bold">
+                <Lock className="w-4 h-4 shrink-0" />
+                <span>DPDP Consent Layer</span>
+              </div>
+              <p className="text-slate-400 leading-relaxed text-[11px]">
+                Time-limited, field-restricted verification tokens ensuring employer background checks require verified student authorization.
+              </p>
+            </div>
 
-            <button
-              onClick={() => {
-                loadScenario('D');
-                navigate('/admin/anomalies');
-              }}
-              className="p-3 text-left rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-slate-700 hover:border-red-400 transition-all text-xs"
-            >
-              <span className="font-bold text-red-300 block mb-1">Scenario D: Institutional Anomaly Signal</span>
-              <span className="text-slate-400">
-                Apex Institute fill-rate cliff (88% to 42% vs peer median 76%). Treated as risk signal, not fraud.
-              </span>
-            </button>
-
-            <button
-              onClick={() => {
-                loadScenario('E');
-                navigate('/institution/students');
-              }}
-              className="p-3 text-left rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-slate-700 hover:border-blue-400 transition-all text-xs"
-            >
-              <span className="font-bold text-blue-300 block mb-1">Scenario E: Legitimate Lateral Entry</span>
-              <span className="text-slate-400">
-                Direct 2nd year entry with diploma record. Stateful capacity calculation verifies no violation.
-              </span>
-            </button>
-
-            <button
-              onClick={() => {
-                loadScenario('F');
-                navigate('/student/consent');
-              }}
-              className="p-3 text-left rounded-lg bg-slate-800 hover:bg-slate-700/80 border border-slate-700 hover:border-teal-400 transition-all text-xs"
-            >
-              <span className="font-bold text-teal-300 block mb-1">Scenario F: Student Consent & Stakeholder QR</span>
-              <span className="text-slate-400">
-                Aarav Sharma approves TCS BGV request; Stakeholder verifies record & inspects QR route.
-              </span>
-            </button>
+            <div className="p-4 rounded-lg bg-slate-800 border border-slate-700 text-xs space-y-2">
+              <div className="flex items-center gap-2 text-indigo-400 font-bold">
+                <ShieldCheck className="w-4 h-4 shrink-0" />
+                <span>Cryptographic Audit Chain</span>
+              </div>
+              <p className="text-slate-400 leading-relaxed text-[11px]">
+                Simulated SHA-256 state hashing for all administrative transitions, reversible identity merges, and exception reviews.
+              </p>
+            </div>
           </div>
         </div>
       </div>

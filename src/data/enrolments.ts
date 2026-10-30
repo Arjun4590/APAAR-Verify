@@ -15,7 +15,7 @@ export const initialEnrolments: Enrolment[] = [
     status: 'Active'
   },
   {
-    // Scenario B: Exact APAAR Match, Physical + Online
+    // Dual Enrolment: Concurrent Physical + Online Degree (UGC 2022 Guidelines)
     id: 'enr-aarav-noola',
     studentId: 'stu-aarav-01',
     institutionId: 'inst-sol-05',
@@ -29,7 +29,7 @@ export const initialEnrolments: Enrolment[] = [
     status: 'Active'
   },
   {
-    // Scenario C: Rohit S. Verma (No APAAR)
+    // Candidate Record 1: WIT CSE Enrolment (APAAR Missing at admission)
     id: 'enr-rohit-wit',
     studentId: 'stu-rohit-02',
     institutionId: 'inst-wit-01',
@@ -43,7 +43,7 @@ export const initialEnrolments: Enrolment[] = [
     status: 'Active'
   },
   {
-    // Scenario C: Rohit Verma (DMEC, Has APAAR, Overlapping Physical Timing)
+    // Candidate Record 2: DMEC ECE Enrolment (Has APAAR, Overlapping Shift Timing)
     id: 'enr-rohit-dmec',
     studentId: 'stu-rohit-03',
     institutionId: 'inst-dtu-02',
@@ -57,7 +57,7 @@ export const initialEnrolments: Enrolment[] = [
     status: 'Active'
   },
   {
-    // Scenario E: Legitimate Lateral Entry
+    // Lateral Entry: 2nd Year Direct Admission with Qualifying Diploma
     id: 'enr-priya-wit',
     studentId: 'stu-priya-04',
     institutionId: 'inst-wit-01',

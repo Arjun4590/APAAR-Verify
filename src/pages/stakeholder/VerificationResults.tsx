@@ -89,14 +89,14 @@ export const VerificationResults: React.FC = () => {
             </p>
             <div className="pt-2">
               <Button
-                variant="primary"
+                variant="outline"
                 size="sm"
                 onClick={() => {
                   setRole('student');
                   navigate('/student/consent');
                 }}
               >
-                Switch to Student Portal & Approve Consent (Scenario F Demo) →
+                Go to Student Portal Consent Review →
               </Button>
             </div>
           </CardContent>

@@ -46,7 +46,7 @@ import { OrganizationProfile } from './pages/stakeholder/OrganizationProfile';
 export const AppRouter: React.FC = () => {
   return (
     <Routes>
-      {/* Landing page with Role and Scenario selectors */}
+      {/* Landing page with Portal Navigation */}
       <Route path="/" element={<LandingPage />} />
 
       {/* Portal 1: AICTE Administration */}

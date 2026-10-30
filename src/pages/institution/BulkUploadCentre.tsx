@@ -24,9 +24,8 @@ export const BulkUploadCentre: React.FC = () => {
     academicYear,
     setAcademicYear,
     stagingRows,
-    loadScenario,
-    revalidateStaging,
-    activeScenario
+    setAllStagingRows,
+    revalidateStaging
   } = useDemoSession();
 
   const navigate = useNavigate();
@@ -35,7 +34,7 @@ export const BulkUploadCentre: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [selectedCourse, setSelectedCourse] = useState('c-wit-cse');
   const [uploadMode, setUploadMode] = useState<'existing' | 'standard' | 'mapper'>('existing');
-  const [uploadedFileName, setUploadedFileName] = useState<string>('WIT_BTech_Admissions_2026.xlsx');
+  const [uploadedFileName, setUploadedFileName] = useState<string>('WIT_BTech_Admissions_2026.csv');
   const [isParsing, setIsParsing] = useState(false);
 
   // Column Mapping Preview state
@@ -49,22 +48,87 @@ export const BulkUploadCentre: React.FC = () => {
     { uploadedHeader: 'Mode of Instruction', mappedTo: 'programmeMode', status: 'Mapped (Auto-detected)' }
   ];
 
-  const handleSimulatedFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setUploadedFileName(file.name);
       setIsParsing(true);
-      setTimeout(() => {
-        setIsParsing(false);
-        setCurrentStep(2);
-      }, 600);
+
+      if (file.name.endsWith('.csv')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const text = event.target?.result as string;
+          if (text) {
+            const lines = text.split(/\r?\n/).filter(line => line.trim().length > 0);
+            if (lines.length > 1) {
+              const parsedRows = lines.slice(1).map((line, idx) => {
+                const cols = line.split(',').map(c => c.trim().replace(/^"|"$/g, ''));
+                return {
+                  rowNumber: idx + 1,
+                  studentName: cols[0] || `Student ${idx + 1}`,
+                  apaarId: cols[1] || '',
+                  dateOfBirth: cols[2] || '2005-01-01',
+                  gender: (cols[3] || 'Male') as any,
+                  courseId: 'c-wit-cse',
+                  courseName: cols[4] || 'B.Tech Computer Science & Engineering',
+                  admissionCategory: (cols[5] || 'General') as any,
+                  entryType: (cols[6] || 'Regular') as any,
+                  programmeMode: (cols[7] || 'Physical') as any,
+                  findings: [],
+                  isValid: true,
+                  status: 'Valid' as const
+                };
+              });
+              setAllStagingRows(parsedRows);
+            }
+          }
+          setIsParsing(false);
+          setCurrentStep(2);
+        };
+        reader.readAsText(file);
+      } else {
+        setTimeout(() => {
+          setIsParsing(false);
+          setCurrentStep(2);
+        }, 500);
+      }
     }
   };
 
-  const handleLoadScenarioA = () => {
-    loadScenario('A');
-    setUploadedFileName('WIT_BTech_CSE_PlantedErrors_Batch.xlsx');
-    setCurrentStep(3);
+  const handleDownloadTemplate = () => {
+    const templateRows = [
+      {
+        Student_Name: 'Priya Anand Sharma',
+        APAAR_ID: '984512345678',
+        Date_Of_Birth: '2005-04-12',
+        Gender: 'Female',
+        Course_Name: 'B.Tech Computer Science & Engineering',
+        Admission_Category: 'General',
+        Entry_Type: 'Regular',
+        Programme_Mode: 'Physical'
+      },
+      {
+        Student_Name: 'Rajesh Kumar Patel',
+        APAAR_ID: '984512345679',
+        Date_Of_Birth: '2005-07-25',
+        Gender: 'Male',
+        Course_Name: 'B.Tech Computer Science & Engineering',
+        Admission_Category: 'TFW',
+        Entry_Type: 'Regular',
+        Programme_Mode: 'Physical'
+      },
+      {
+        Student_Name: 'Ananya S. Iyer',
+        APAAR_ID: '984512345680',
+        Date_Of_Birth: '2005-10-18',
+        Gender: 'Female',
+        Course_Name: 'B.Tech Computer Science & Engineering',
+        Admission_Category: 'General',
+        Entry_Type: 'Regular',
+        Programme_Mode: 'Physical'
+      }
+    ];
+    exportToCSV('AICTE_Standard_Student_Upload_Template', templateRows);
   };
 
   const handleDownloadErrorReport = () => {
@@ -97,12 +161,12 @@ export const BulkUploadCentre: React.FC = () => {
         </div>
         <div className="flex items-center gap-2">
           <Button
-            variant="primary"
+            variant="outline"
             size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5" />}
-            onClick={handleLoadScenarioA}
+            icon={<Download className="w-3.5 h-3.5" />}
+            onClick={handleDownloadTemplate}
           >
-            Load Scenario A (Planted Batch)
+            Download CSV Template
           </Button>
         </div>
       </div>
@@ -237,24 +301,24 @@ export const BulkUploadCentre: React.FC = () => {
               <input
                 type="file"
                 accept=".xlsx,.xls,.csv"
-                onChange={handleSimulatedFileUpload}
+                onChange={handleFileUpload}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
               <Upload className="w-8 h-8 text-blue-600 mx-auto mb-2" />
               <p className="font-bold text-slate-800 text-sm">
-                Drop your Excel (.xlsx) or CSV file here, or click to browse
+                Drop your institutional CSV or Excel file here, or click to browse
               </p>
               <p className="text-[11px] text-slate-500 mt-1">
                 Selected File: <span className="font-mono text-blue-900 font-semibold">{uploadedFileName}</span>
               </p>
               <p className="text-[10px] text-slate-400 mt-2">
-                Simulated local parsing only · No server uploads · Maximum 5,000 rows
+                Client-side parsing & instant validation · Standard AICTE schema format
               </p>
             </div>
 
             <div className="flex justify-between items-center pt-2">
-              <span className="text-[11px] text-slate-400">
-                Tip: Click "Load Scenario A" in the header to instantly load the planted demonstration batch.
+              <span className="text-[11px] text-slate-500">
+                You can download the standard AICTE CSV template from the header above.
               </span>
               <Button
                 variant="primary"
@@ -373,7 +437,7 @@ export const BulkUploadCentre: React.FC = () => {
               </div>
             </div>
 
-            {/* Scenario A Finding Alert */}
+            {/* Staging Validation Finding Alert */}
             {blockingErrorsCount > 0 ? (
               <div className="p-4 bg-red-50 border border-red-200 rounded-xl space-y-2 text-red-950">
                 <span className="font-bold flex items-center gap-1.5 text-red-800">

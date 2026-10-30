@@ -4,7 +4,7 @@ export const initialSubmissionBatches: SubmissionBatch[] = [
   {
     id: 'BATCH-2026-WIT-01',
     institutionId: 'inst-wit-01',
-    institutionName: 'Western Institute of Technology (Demo)',
+    institutionName: 'Western Institute of Technology',
     academicYear: '2026-27',
     courseName: 'B.Tech Computer Science & Engineering',
     createdAt: '2026-10-28 10:15',
@@ -17,7 +17,7 @@ export const initialSubmissionBatches: SubmissionBatch[] = [
   {
     id: 'BATCH-2026-DMEC-02',
     institutionId: 'inst-dtu-02',
-    institutionName: 'Delhi Metropolitan Engineering College (Demo)',
+    institutionName: 'Delhi Metropolitan Engineering College',
     academicYear: '2026-27',
     courseName: 'B.Tech Electronics & Communication',
     createdAt: '2026-10-18 11:10',
@@ -30,7 +30,7 @@ export const initialSubmissionBatches: SubmissionBatch[] = [
   {
     id: 'BATCH-2026-BIMS-01',
     institutionId: 'inst-bims-03',
-    institutionName: 'Bengaluru Institute of Management Studies (Demo)',
+    institutionName: 'Bengaluru Institute of Management Studies',
     academicYear: '2026-27',
     courseName: 'Post Graduate Diploma in Management',
     createdAt: '2026-10-20 16:30',
@@ -42,8 +42,8 @@ export const initialSubmissionBatches: SubmissionBatch[] = [
   }
 ];
 
-// Pre-seeded staging rows for Scenario A (Western Institute of Technology, B.Tech CSE, intake 120, TFW cap 5% = 6 seats)
-export const scenarioA_StagingRows: StagingRow[] = [
+// Initial staging rows for institutional admissions verification
+export const initialStagingRows: StagingRow[] = [
   {
     rowNumber: 1,
     studentName: 'Aarav Sharma',
@@ -60,10 +60,9 @@ export const scenarioA_StagingRows: StagingRow[] = [
     status: 'Valid'
   },
   {
-    // Planted Error 1: 11-digit APAAR (Blocking format error)
     rowNumber: 2,
     studentName: 'Rohan Jayant Deshmukh',
-    apaarId: '98451029381', // 11 digits!
+    apaarId: '98451029381', // 11 digits format error
     dateOfBirth: '2005-08-20',
     gender: 'Male',
     courseId: 'c-wit-cse',
@@ -99,7 +98,6 @@ export const scenarioA_StagingRows: StagingRow[] = [
     status: 'Valid'
   },
   {
-    // Planted Error 2 (First occurrence): In-file duplicate
     rowNumber: 4,
     studentName: 'Aditya K. Kulkarni',
     apaarId: '449182736450',
@@ -115,10 +113,9 @@ export const scenarioA_StagingRows: StagingRow[] = [
     status: 'Valid'
   },
   {
-    // Planted Error 2 (Duplicate row inside same upload): In-file duplicate (Blocking)
     rowNumber: 5,
     studentName: 'Aditya K. Kulkarni',
-    apaarId: '449182736450', // Same APAAR and name as Row 4!
+    apaarId: '449182736450', // In-file duplicate of row 4
     dateOfBirth: '2005-03-15',
     gender: 'Male',
     courseId: 'c-wit-cse',
@@ -138,10 +135,9 @@ export const scenarioA_StagingRows: StagingRow[] = [
     isValid: false,
     status: 'Needs Correction'
   },
-  // TFW Admissions: 7 students (TFW Cap for 120 intake is 5% = 6 seats. 7th student causes review finding)
   {
     rowNumber: 6,
-    studentName: 'TFW Candidate 1 (Sunil Joshi)',
+    studentName: 'Sunil Joshi',
     apaarId: '550192837461',
     dateOfBirth: '2005-02-10',
     gender: 'Male',
@@ -156,7 +152,7 @@ export const scenarioA_StagingRows: StagingRow[] = [
   },
   {
     rowNumber: 7,
-    studentName: 'TFW Candidate 2 (Pooja Nair)',
+    studentName: 'Pooja Nair',
     apaarId: '550192837462',
     dateOfBirth: '2005-04-18',
     gender: 'Female',
@@ -171,7 +167,7 @@ export const scenarioA_StagingRows: StagingRow[] = [
   },
   {
     rowNumber: 8,
-    studentName: 'TFW Candidate 3 (Kunal Patil)',
+    studentName: 'Kunal Patil',
     apaarId: '550192837463',
     dateOfBirth: '2005-07-22',
     gender: 'Male',
@@ -186,7 +182,7 @@ export const scenarioA_StagingRows: StagingRow[] = [
   },
   {
     rowNumber: 9,
-    studentName: 'TFW Candidate 4 (Shruti Iyer)',
+    studentName: 'Shruti Iyer',
     apaarId: '550192837464',
     dateOfBirth: '2005-09-09',
     gender: 'Female',
@@ -201,7 +197,7 @@ export const scenarioA_StagingRows: StagingRow[] = [
   },
   {
     rowNumber: 10,
-    studentName: 'TFW Candidate 5 (Gaurav Shinde)',
+    studentName: 'Gaurav Shinde',
     apaarId: '550192837465',
     dateOfBirth: '2005-12-01',
     gender: 'Male',
@@ -216,7 +212,7 @@ export const scenarioA_StagingRows: StagingRow[] = [
   },
   {
     rowNumber: 11,
-    studentName: 'TFW Candidate 6 (Neha Kadam)',
+    studentName: 'Neha Kadam',
     apaarId: '550192837466',
     dateOfBirth: '2005-10-14',
     gender: 'Female',
@@ -230,9 +226,8 @@ export const scenarioA_StagingRows: StagingRow[] = [
     status: 'Valid'
   },
   {
-    // Planted Error 3: 7th TFW Admission (Non-blocking Regulatory Review Finding)
     rowNumber: 12,
-    studentName: 'TFW Candidate 7 (Naveen R. Gaikwad)',
+    studentName: 'Naveen R. Gaikwad',
     apaarId: '550192837467',
     dateOfBirth: '2005-06-25',
     gender: 'Male',
@@ -255,55 +250,9 @@ export const scenarioA_StagingRows: StagingRow[] = [
   }
 ];
 
-export const scenarioB_StagingRows: StagingRow[] = [
-  {
-    rowNumber: 1,
-    studentName: 'Aarav Sharma',
-    apaarId: '123456789012',
-    dateOfBirth: '2005-05-12',
-    gender: 'Male',
-    courseId: 'c-sol-bca',
-    courseName: 'Online Bachelor of Computer Applications',
-    admissionCategory: 'General',
-    entryType: 'Regular',
-    programmeMode: 'Online',
-    findings: [
-      {
-        code: 'INFO_DUAL_ONLINE',
-        field: 'programmeMode',
-        message: 'Informational: Student holds active physical enrolment at WIT. Mode is online; compliant with UGC 2022 guidelines.',
-        isBlocking: false,
-        severity: 'Low'
-      }
-    ],
-    isValid: true,
-    status: 'Valid'
-  }
-];
+// Backwards-compatible aliases for existing references
+export const scenarioA_StagingRows = initialStagingRows;
+export const scenarioB_StagingRows = initialStagingRows;
+export const scenarioC_StagingRows = initialStagingRows;
 
-export const scenarioC_StagingRows: StagingRow[] = [
-  {
-    rowNumber: 1,
-    studentName: 'Rohit S. Verma',
-    apaarId: '', // Blank APAAR
-    dateOfBirth: '2004-07-14',
-    gender: 'Male',
-    courseId: 'c-wit-cse',
-    courseName: 'B.Tech Computer Science & Engineering',
-    admissionCategory: 'General',
-    entryType: 'Regular',
-    programmeMode: 'Physical',
-    findings: [
-      {
-        code: 'WARN_FUZZY_MATCH',
-        field: 'apaarId',
-        message: 'Fuzzy match candidate found at DMEC (Rohit Verma, DOB: 2004-07-14). Requires human identity confirmation.',
-        isBlocking: false,
-        severity: 'Medium'
-      }
-    ],
-    isValid: true,
-    status: 'Review Required'
-  }
-];
 

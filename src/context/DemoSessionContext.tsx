@@ -18,7 +18,7 @@ import { initialRegulatoryRules } from '../data/rules';
 import { initialStudents } from '../data/students';
 import { initialEnrolments } from '../data/enrolments';
 import { initialFindings } from '../data/findings';
-import { initialSubmissionBatches, scenarioA_StagingRows, scenarioB_StagingRows, scenarioC_StagingRows } from '../data/submissions';
+import { initialSubmissionBatches, initialStagingRows } from '../data/submissions';
 import { initialVerificationRequests, initialCorrectionRequests } from '../data/verifications';
 import { initialAuditLogs } from '../data/auditLogs';
 import { revalidateStagingRows } from '../utils/validation';
@@ -52,10 +52,9 @@ interface DemoSessionContextType {
   verificationRequests: ThirdPartyVerificationRequest[];
   correctionRequests: StudentCorrectionRequest[];
   notifications: NotificationItem[];
-  activeScenario: string;
 
   // Actions
-  loadScenario: (scenario: 'A' | 'B' | 'C' | 'D' | 'E' | 'F') => void;
+  setAllStagingRows: (rows: StagingRow[]) => void;
   updateStagingRow: (rowNumber: number, field: string, value: any) => void;
   revalidateStaging: () => void;
   commitStagingBatch: () => { success: boolean; message: string };
@@ -85,7 +84,6 @@ export const DemoSessionProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [currentRole, setRole] = useState<DemoRole>('admin');
   const [academicYear, setAcademicYear] = useState<string>('2026-27');
   const [selectedInstitutionId, setSelectedInstitutionId] = useState<string>('inst-wit-01');
-  const [activeScenario, setActiveScenario] = useState<string>('A');
 
   const [institutions, setInstitutions] = useState<Institution[]>(initialInstitutions);
   const [students, setStudents] = useState<Student[]>(initialStudents);
@@ -93,7 +91,7 @@ export const DemoSessionProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [findings, setFindings] = useState<Finding[]>(initialFindings);
   const [rules, setRules] = useState<RegulatoryRule[]>(initialRegulatoryRules);
   const [submissionBatches, setSubmissionBatches] = useState<SubmissionBatch[]>(initialSubmissionBatches);
-  const [stagingRows, setStagingRows] = useState<StagingRow[]>(scenarioA_StagingRows);
+  const [stagingRows, setStagingRows] = useState<StagingRow[]>(initialStagingRows);
   const [auditLogs, setAuditLogs] = useState<AuditEvent[]>(initialAuditLogs);
   const [verificationRequests, setVerificationRequests] = useState<ThirdPartyVerificationRequest[]>(initialVerificationRequests);
   const [correctionRequests, setCorrectionRequests] = useState<StudentCorrectionRequest[]>(initialCorrectionRequests);
@@ -180,32 +178,15 @@ export const DemoSessionProvider: React.FC<{ children: React.ReactNode }> = ({ c
     });
   };
 
-  const loadScenario = (scenario: 'A' | 'B' | 'C' | 'D' | 'E' | 'F') => {
-    setActiveScenario(scenario);
-    if (scenario === 'A') {
-      setStagingRows(scenarioA_StagingRows);
-      setRole('institution_admin');
-      setSelectedInstitutionId('inst-wit-01');
-      addAuditEvent('LOAD_SCENARIO_A', 'BATCH-2026-WIT-01', 'Loaded Scenario A: Fix-Before-Submit (11-digit APAAR, duplicate row, TFW cap).');
-    } else if (scenario === 'B') {
-      setStagingRows(scenarioB_StagingRows);
-      setRole('admin');
-      addAuditEvent('LOAD_SCENARIO_B', 'CASE-00042', 'Loaded Scenario B: Exact APAAR Match across Physical + Online institution.');
-    } else if (scenario === 'C') {
-      setStagingRows(scenarioC_StagingRows);
-      setRole('admin');
-      addAuditEvent('LOAD_SCENARIO_C', 'CASE-00078', 'Loaded Scenario C: Fuzzy Identity Candidate with Overlapping Shift Timing.');
-    } else if (scenario === 'D') {
-      setRole('admin');
-      addAuditEvent('LOAD_SCENARIO_D', 'inst-apex-04', 'Loaded Scenario D: Institutional Anomaly (Fill-Rate Cliff).');
-    } else if (scenario === 'E') {
-      setRole('institution_admin');
-      setSelectedInstitutionId('inst-wit-01');
-      addAuditEvent('LOAD_SCENARIO_E', 'stu-priya-04', 'Loaded Scenario E: Legitimate Lateral Entry Progression.');
-    } else if (scenario === 'F') {
-      setRole('student');
-      addAuditEvent('LOAD_SCENARIO_F', 'VRF-2026-8821', 'Loaded Scenario F: Student Consent & Stakeholder Verification.');
-    }
+  const setAllStagingRows = (rows: StagingRow[]) => {
+    const validated = revalidateStagingRows(rows);
+    setStagingRows(validated);
+    saveToStorage({ stagingRows: validated });
+    addAuditEvent(
+      'INGEST_SPREADSHEET',
+      'BATCH-2026-WIT-01',
+      `Ingested ${rows.length} rows into staging area. Detected ${validated.filter(r => !r.isValid).length} blocking errors.`
+    );
   };
 
   const updateStagingRow = (rowNumber: number, field: string, value: any) => {
@@ -591,13 +572,12 @@ export const DemoSessionProvider: React.FC<{ children: React.ReactNode }> = ({ c
     setFindings(initialFindings);
     setRules(initialRegulatoryRules);
     setSubmissionBatches(initialSubmissionBatches);
-    setStagingRows(scenarioA_StagingRows);
+    setStagingRows(initialStagingRows);
     setAuditLogs(initialAuditLogs);
     setVerificationRequests(initialVerificationRequests);
     setCorrectionRequests(initialCorrectionRequests);
     setRole('admin');
-    setActiveScenario('A');
-    alert('Demo data has been reset to default synthetic state.');
+    alert('Application data has been reset to default state.');
   };
 
   return (
@@ -620,9 +600,8 @@ export const DemoSessionProvider: React.FC<{ children: React.ReactNode }> = ({ c
         verificationRequests,
         correctionRequests,
         notifications,
-        activeScenario,
 
-        loadScenario,
+        setAllStagingRows,
         updateStagingRow,
         revalidateStaging,
         commitStagingBatch,

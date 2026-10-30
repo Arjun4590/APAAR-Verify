@@ -18,9 +18,9 @@ export const initialVerificationRequests: ThirdPartyVerificationRequest[] = [
     ],
     requestDate: '2026-10-28',
     expiryDate: '2026-11-28',
-    consentStatus: 'Pending Approval', // Can be approved in Scenario F
+    consentStatus: 'Pending Approval', // Awaiting candidate authorization in Student Portal
     resultStatus: 'Pending',
-    source: 'Local Demo Repository'
+    source: 'Central Student Repository'
   },
   {
     id: 'req-infy-02',
@@ -58,7 +58,7 @@ export const initialVerificationRequests: ThirdPartyVerificationRequest[] = [
     expiryDate: '2026-11-02',
     consentStatus: 'Rejected',
     resultStatus: 'Pending',
-    source: 'Local Demo Repository'
+    source: 'Central Student Repository'
   }
 ];
 

@@ -23,7 +23,7 @@ import { getStatusBadgeClass } from '../../utils/formatters';
 import { useNavigate } from 'react-router-dom';
 
 export const VerificationCentre: React.FC = () => {
-  const { findings, loadScenario } = useDemoSession();
+  const { findings } = useDemoSession();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState('ALL');
@@ -67,24 +67,6 @@ export const VerificationCentre: React.FC = () => {
           <p className="text-xs text-slate-500 mt-0.5">
             Automated verification results across format, exact duplicate, fuzzy identity, dual-enrolment and regulatory caps.
           </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5 text-blue-600" />}
-            onClick={() => loadScenario('B')}
-          >
-            Load Scenario B (Dual Mode)
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            icon={<Sparkles className="w-3.5 h-3.5 text-amber-600" />}
-            onClick={() => loadScenario('C')}
-          >
-            Load Scenario C (Fuzzy Match)
-          </Button>
         </div>
       </div>
 
